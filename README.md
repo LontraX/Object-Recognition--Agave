@@ -62,7 +62,7 @@ The script will load the dataset, preprocess the images, split the dataset into 
 
 ## Functions
 
-```python
+
 load_dataset(data_dir)
 This function loads the dataset from the specified directory and returns two lists: train_data and test_data. Each item in the list consists of an image, annotation, trimap, class ID, species ID, and breed ID.
 
@@ -97,7 +97,7 @@ train_model(train_dataset, test_dataset)
 This function trains the object recognition model using transfer learning with the pre-trained ResNet50 model. It freezes the pre-trained layers, adds a new classification layer on top, compiles the model, and fits it to the training dataset.
 
 The function saves the trained model as a file and returns the model object.
-```
+
 
 ## Conclusion
 
