@@ -19,21 +19,14 @@ def predict():
         # Get the image file from the request
         image_file = request.files['image']
         
-        # Read the image file
-        #image = Image.open(image_file)
         # Read the image file using OpenCV
         image_array = np.array(cv2.imdecode(np.frombuffer(image_file.read(), np.uint8), -1))
 
         # Resize the image to the required shape
         resized_image = cv2.resize(image_array, (224, 224))
 
-
-
-
-
         # Make predictions using the loaded model
         predictions = model.predict(np.expand_dims(resized_image, axis=0))
-
 
         # Preprocess the image if necessary
         #preprocessed_image = preprocess_image(image_array)
@@ -50,25 +43,14 @@ def predict():
     except Exception as e:
         # Handle any exceptions that occur during prediction
         return jsonify({'error': str(e)}), 400
-
-# Preprocess the input data
-def preprocess_image(data):
     
-    
-    # Resize image to a specific size
-    image = cv2.resize(data, (224, 224))
-    #convert data to NumPy array, perform scaling
-    processed_data = np.array(image)
-    
-    return processed_data
-
 # Postprocess the predictions
 def postprocess_predictions(predictions):
     # Convert the predictions into class labels
     predicted_labels = np.argmax(predictions, axis=1)
     # For example, convert predictions to a suitable format, apply thresholding, etc.
     postprocessed_predictions = predicted_labels.tolist()
-    # ...
+    
     return postprocessed_predictions
 
 if __name__ == '__main__':

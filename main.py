@@ -36,15 +36,12 @@ def load_dataset(data_dir):
     train_data, test_data = train_test_split(dataset, test_size=0.2, random_state=42)
     return train_data, test_data
 
-
-
 def preprocess_image(image_path, annotation_path, trimap_path):
     try:
         # Load image, annotation, and trimap
         image = cv2.imread(image_path)
         annotation = load_annotation(annotation_path)
         trimap = load_trimap(trimap_path)
-        
         # preprocessing steps
         # Resize image to a specific size
         image = cv2.resize(image, (224, 224))
@@ -58,10 +55,7 @@ def load_annotation(annotation_path):
     try:
         tree = ET.parse(annotation_path)
         root = tree.getroot()
-    
         objects = root.findall('object')
-    
-    
         for obj in objects:
             bndbox = obj.find('bndbox')
             xmin = int(bndbox.find('xmin').text)
@@ -138,7 +132,6 @@ def train_model(train_dataset, test_dataset):
     # Compile the model
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
-
      # Extract features and labels from the training dataset
     train_images = np.array([item[0] for item in train_dataset])
     train_annotations = np.array([item[1] for item in train_dataset])
@@ -167,18 +160,14 @@ def train_model(train_dataset, test_dataset):
     return model
 
 if __name__ == '__main__':
-    data_dir = 'C:/Users/Olumide Joda/source/repos/object_recognition/Data/oxford-iiit-pet'
+    
+    data_dir = 'C:\Users\Olumide Joda\source\repos\object_recognition\Data'
     train_data, test_data = load_dataset(data_dir)
     model = train_model(train_data, test_data)
-
      # Extract features and labels from the test dataset
     test_images = np.array([item[0] for item in test_data])
     #test_annotations = np.array([item[1] for item in test_data])
     test_labels = np.array([item[3:] for item in test_data])
-
-
-
-
     # Evaluate the model on the test dataset
     accuracy = evaluate_model(model, test_images, test_labels)
     print(f"Test Accuracy for this model is: {accuracy}")
