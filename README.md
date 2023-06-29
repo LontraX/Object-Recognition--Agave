@@ -52,6 +52,8 @@ python main.py
 
 The script will load the dataset, preprocess the images, split the dataset into training and testing sets, train the model, and evaluate its performance.
 
+The model can also be accessed via an API endpoint. 
+
 ## Functions
 
 
