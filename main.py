@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 import tensorflow as tf
 from sklearn.utils import class_weight
 
+# loads the dataset and splits it into train and test sets
 def load_dataset(data_dir):
     image_dir = os.path.join(data_dir, 'images') 
     
@@ -36,6 +37,8 @@ def load_dataset(data_dir):
     train_data, test_data = train_test_split(dataset, test_size=0.2, random_state=42)
     return train_data, test_data
 
+
+# preprocesses the image, here it resizes the image
 def preprocess_image(image_path, annotation_path, trimap_path):
     try:
         # Load image, annotation, and trimap
