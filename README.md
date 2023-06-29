@@ -54,51 +54,51 @@ The script will load the dataset, preprocess the images, split the dataset into 
 
 ## Functions
 
-```
-load_dataset(data_dir)
-This function loads the dataset from the specified directory and returns two lists: train_data and test_data. Each item in the list consists of an image, annotation, trimap, class ID, species ID, and breed ID.
-```
 
-```
-preprocess_image(image_path, annotation_path, trimap_path)
+### load_dataset(data_dir)
+This function loads the dataset from the specified directory and returns two lists: train_data and test_data. Each item in the list consists of an image, annotation, trimap, class ID, species ID, and breed ID.
+
+
+
+
+### preprocess_image(image_path, annotation_path, trimap_path)
 This function takes the paths of an image, its annotation, and trimap, and performs the following preprocessing steps:
 
 Load the image, annotation, and trimap using OpenCV.
 Resize the image to a specific size (224x224 pixels).
 The function returns the preprocessed image, annotation, and trimap.
-```
 
-```
-load_annotation(annotation_path)
+
+
+### load_annotation(annotation_path)
 This function loads the annotation from an XML file and returns a list of bounding boxes. Each bounding box is represented as [xmin, ymin, xmax, ymax].
-```
 
-```
-load_trimap(trimap_path)
+
+
+### load_trimap(trimap_path)
 This function loads the trimap image using OpenCV and performs the following steps:
 
 Normalize the trimap values to the range [0, 1].
 Threshold the trimap to obtain a binary mask: 0 for background, 1 for foreground, and 0.5 for areas not classified.
 The function returns the binary trimap mask.
-```
-```
-augment_dataset()
+
+### augment_dataset()
 This function creates an image data generator using TensorFlow's ImageDataGenerator class. It applies various augmentations to the images, such as random rotation, shifting, flipping, and brightness adjustment.
 
 The function returns the data generator.
-```
-```
-evaluate_model(model, test_images, test_labels)
+
+
+### evaluate_model(model, test_images, test_labels)
 This function takes a trained model, test images, and test labels as input. It predicts the labels for the test images, converts the predictions and true labels into class labels, and calculates the accuracy score.
 
 The function returns the accuracy score.
-```
-```
-train_model(train_dataset, test_dataset)
+
+
+### train_model(train_dataset, test_dataset)
 This function trains the object recognition model using transfer learning with the pre-trained ResNet50 model. It freezes the pre-trained layers, adds a new classification layer on top, compiles the model, and fits it to the training dataset.
 
 The function saves the trained model as a file and returns the model object.
-```
+
 
 
 ## Conclusion
