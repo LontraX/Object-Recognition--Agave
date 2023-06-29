@@ -28,12 +28,6 @@ def predict():
         # Make predictions using the loaded model
         predictions = model.predict(np.expand_dims(resized_image, axis=0))
 
-        # Preprocess the image if necessary
-        #preprocessed_image = preprocess_image(image_array)
-        
-        # Make predictions using the loaded model
-        #predictions = model.predict(preprocessed_image)
-        
         # Postprocess the predictions if necessary
         postprocessed_predictions = postprocess_predictions(predictions)
         
