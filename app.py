@@ -38,6 +38,22 @@ def predict():
         # Handle any exceptions that occur during prediction
         return jsonify({'error': str(e)}), 400
     
+
+
+
+def extract_information(predictions, class_id_labels, species_labels, breed_id_labels):
+    # Retrieve the index with the highest probability for each prediction
+    predicted_indices = np.argmax(predictions, axis=1)
+    
+    # Map the indices to the actual labels
+    predicted_class_ids = [class_id_labels[idx] for idx in predicted_indices]
+    predicted_species = [species_labels[idx] for idx in predicted_indices]
+    predicted_breed_ids = [breed_id_labels[idx] for idx in predicted_indices]
+    
+    return predicted_class_ids, predicted_species, predicted_breed_ids
+
+
+
 # Postprocess the predictions
 def postprocess_predictions(predictions):
     # Convert the predictions into class labels
