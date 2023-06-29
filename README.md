@@ -99,7 +99,18 @@ This function trains the object recognition model using transfer learning with t
 
 The function saves the trained model as a file and returns the model object.
 
+## Techniques and strategies used to handle bias and improve accuracy scores:
+- Data preprocessing: The code includes data preprocessing steps such as resizing the images to a specific size (224x224), loading annotations and trimaps, and performing normalization and thresholding on the trimap values. These preprocessing steps help to standardize and enhance the input data for better model performance.
 
+- Data augmentation: The code uses the augment_dataset() function to apply data augmentation techniques such as rotation, width and height shifting, horizontal flipping, and brightness adjustments. Data augmentation helps to increase the diversity and variability of the training data, which can improve the model's ability to generalize to unseen examples and reduce overfitting.
+
+- Transfer learning: The code utilizes transfer learning by loading a pre-trained ResNet50 model and freezing its pre-trained layers. By leveraging the knowledge learned from training on a large dataset (ImageNet), transfer learning allows the model to benefit from the pre-trained weights and extract relevant features from the input images. The model then adds a new classification layer that is trained on the specific task at hand.
+
+- Model architecture: The model architecture consists of a base model (ResNet50) followed by a global average pooling layer, a dense layer with ReLU activation, and a final dense layer with softmax activation for multi-class classification. This architecture is commonly used in transfer learning scenarios and has been shown to be effective for image classification tasks.
+
+- Model training and validation: The code splits the training dataset into training and validation sets using the train_test_split() function. It then uses the fit() function to train the model on the augmented training data, with a specified batch size and a single epoch. The validation data is used to monitor the model's performance during training and prevent overfitting.
+
+- Evaluation: After training the model, the code evaluates its performance on the test dataset using the evaluate() function. It calculates the test loss and accuracy, providing insights into the model's ability to generalize to unseen data.
 
 ## Conclusion
 
